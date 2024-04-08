@@ -1,29 +1,42 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
 const { expect, $ } = require('@wdio/globals')
-const LoginPage = require('../pageobjects/login.page');
 const HomePage = require('../pageobjects/home.page');
-const ABTestPage = require('../pageobjects/abtest.page');
 const ChallengeDomPage = require('../pageobjects/challengedom.page');
+const AddRemovePage = require('../pageobjects/addRemove.page');
 
 const pages = {
-    login: LoginPage,
     home: HomePage,
-    abTest: ABTestPage,
-    challengeDom: ChallengeDomPage
+    challengeDom: ChallengeDomPage,
+    addRemovePage: AddRemovePage,
 }
 
     Given("I am on the heroku app homepage", async () => {
-        browser.url("https://the-internet.herokuapp.com/")
+        browser.url("https://the-internet.herokuapp.com/");
     });
 
-    When("I click on AB test", async () => {
-            await pages.home.abLink.click();
+    When("I click on add-remove elements", async () => {
+        (await pages.home.addRemoveElementsLink).click();
     });
 
-    Then("I should see the AB test page", async () => {
-        await expect(pages.abTest.content).toBeExisting();
-        await expect(pages.abTest.content).toHaveTextContaining('A/B Test Control');
+    Then("I should see the add-remove elements page", async () => {
+        await expect(pages.addRemovePage.content).toBeExisting();
+        await expect(pages.addRemovePage.content).toHaveTextContaining('Add/Remove Elements');
     });
+
+    Then("I can add an element to the page", async () => {
+        const before = await pages.addRemovePage.countNumberOfDeleteButtons();
+        await pages.addRemovePage.addButton.click();
+        const after = await pages.addRemovePage.countNumberOfDeleteButtons();
+        await expect(after).toEqual(before + 1);   
+    });
+
+    Then("I can remove an element from the page", async () => {
+        const before = await pages.addRemovePage.countNumberOfDeleteButtons();
+        await pages.addRemovePage.deleteButton.click();
+        const after = await pages.addRemovePage.countNumberOfDeleteButtons();
+        await expect(after).toEqual(before - 1);
+    });
+
 
 
 
