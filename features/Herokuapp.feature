@@ -1,12 +1,14 @@
 Feature: The Internet Guinea Pig Website
-
-  Scenario: As a user, I can go to the A/B test page
+@current
+  Scenario: As a user, I can add and remove elements on the add/remove elements page
 
     Given I am on the heroku app homepage
-    When I click on AB test
-    Then I should see the AB test page
+    When I click on add-remove elements
+    Then I should see the add-remove elements page
+    And I can add an element to the page
+    And I can remove an element from the page
 
-@current
+
     Scenario Outline: As a user, I can view a specific element in the challengeDom table
 
     Given I am on the heroku app homepage

@@ -10,6 +10,10 @@ class HomePage extends Page  {
     get challengeDomLink() {
         return $('a=Challenging DOM');
     }
+
+    get addRemoveElementsLink(){
+        return $('a=Add/Remove Elements');
+    }
 }
 
 module.exports = new HomePage();
