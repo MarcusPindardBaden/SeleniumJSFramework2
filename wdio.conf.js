@@ -1,4 +1,6 @@
 exports.config = {
+    // Import the fs module to read the file
+
     //
     // ====================
     // Runner Configuration
@@ -119,11 +121,13 @@ exports.config = {
     //
     // Whether or not retried spec files should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
-    //
-    // Test reporter for stdout.
-    // The only one supported by default is 'dot'
-    // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+
+// reporters: ['spec'],
+    reporters: [['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+    }]],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
@@ -252,8 +256,11 @@ exports.config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
+    afterStep: async function (step, scenario, { error, duration, passed }, context) {
+        if (error) {
+          await browser.takeScreenshot();
+        }
+      }
     /**
      *
      * Runs after a Cucumber Scenario.
@@ -283,6 +290,7 @@ exports.config = {
      * @param {object} error error object if any
      */
     // afterCommand: function (commandName, args, result, error) {
+        
     // },
     /**
      * Gets executed after all tests are done. You still have access to all global variables from
