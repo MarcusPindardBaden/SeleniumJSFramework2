@@ -33,15 +33,12 @@ class ChallengeDomPage extends Page  {
         for(let element of cellRowElements)
         {
             let elementText = await element.getText();
-            await console.log(elementText);
             if(elementText.match(cellvalue))
             {
                 columnIndex = cellRowElements.indexOf(element);
-                console.log(columnIndex);
                 break;
             }
         }
-        await console.log(columnIndex);
         return this.table.$$('th')[columnIndex].getText();
     }
 }
