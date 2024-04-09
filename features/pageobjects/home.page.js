@@ -14,6 +14,10 @@ class HomePage extends Page  {
     get addRemoveElementsLink(){
         return $('a=Add/Remove Elements');
     }
+
+    get formAuthLink(){
+        return $('a=Form Authentication');
+    }
 }
 
 module.exports = new HomePage();
