@@ -11,7 +11,7 @@ To run a specific tag run 'npm run tagTest' followed by the tag, e.g. 'npm run t
 The report won't get generated if one of the tests fails so to generate the report again hit 'npm run report'. Any failed tests should have a screenshot attached in the report to help with debugging.
 
 You will want to clear reuslts regularly as they build up in the allure-report otherwise. To clear the results hit either:
-* 'rm -r allure-result's if on Windows
-* 'rmdir allure-result's if on Mac
+* 'rm -r allure-results' if on Windows
+* 'rmdir allure-results' if on Mac
 
 Make sure you have administrator permissions otherwise you could get blocked
