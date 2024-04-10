@@ -15,3 +15,12 @@ You will want to clear reuslts regularly as they build up in the allure-report o
 * 'rmdir allure-results' if on Mac
 
 Make sure you have administrator permissions otherwise you could get blocked
+
+TO TEST ON ANDROID:
+* Make sure you have android studio or at least the respective sdk tools downloaded
+* Make sure you have Appium installed also
+* On one terminal run the command appium to start the appium server up. There should be a port number (e.g. 4723), that can be set in the wdio.conf.js file. Make sure the capabilities also match the emulator you're running
+* Start running the emulator
+* hit npm run wdio to start the tests. They will currently be failing on the first page as I need to write a before scenario hook to clear the intro message on chrome mobile apps. I'll do this on the next commit
+
+If any steps above are failing check commands such as appium-doctor, adb devices etc are working as there's likely missing files downloaded or paths to be added/bash profiles to be updated

@@ -1,2 +1,5 @@
 "Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
-"","The Internet Guinea Pig Website: As a user, I get the correct error message on failed login","","1","0","6","0","0"
+"","The Internet Guinea Pig Website: As a user, I get the correct error message on failed login","","0","0","8","0","0"
+"","The Internet Guinea Pig Website: As a user, I can view a specific element in the challengeDom table","","0","0","10","0","0"
+"","The Internet Guinea Pig Website: As a user, I can add and remove elements on the add/remove elements page","","0","0","6","0","0"
+"","The Internet Guinea Pig Website: As a user, I can successfully login via the form","","0","0","6","0","0"

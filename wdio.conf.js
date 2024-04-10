@@ -51,8 +51,19 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
+    port:4723,
+    services: ['appium',{
+            
+    }],
     capabilities: [{
-        browserName: 'chrome'
+        // browserName: 'chrome',
+        'appium:platformName': 'Android',
+        'appium:platformVersion': '14.0',
+        'appium:automationName': 'UiAutomator2',
+        'appium:deviceName': 'Pixel 6 Pro API 34',
+        'appium:autoGrantPermissions': true,
+        'appium:appPackage': 'com.android.chrome',
+        'appium:appActivity': 'com.google.android.apps.chrome.Main',
     }],
 
     //
