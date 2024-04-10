@@ -63,7 +63,7 @@ exports.config = {
         'appium:deviceName': 'Pixel 6 Pro API 34',
         'appium:autoGrantPermissions': true,
         'appium:appPackage': 'com.android.chrome',
-        'appium:appActivity': 'com.google.android.apps.chrome.Main',
+        'appium:appActivity': 'com.google.android.apps.chrome.Main'
     }],
 
     //
@@ -245,8 +245,13 @@ exports.config = {
      * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
      * @param {object}                 context  Cucumber World object
      */
-    // beforeScenario: function (world, context) {
-    // },
+    beforeScenario: async function (world, context) {
+        if(this.port == 4723){
+            const selector = 'new UiSelector().resourceId("com.android.chrome:id/signin_fre_dismiss_button")';
+            const button = await $(`android=${selector}`);
+            await button.click();
+        }
+    },
     /**
      *
      * Runs before a Cucumber Step.
@@ -255,6 +260,7 @@ exports.config = {
      * @param {object}             context  Cucumber World object
      */
     // beforeStep: function (step, scenario, context) {
+        
     // },
     /**
      *

@@ -13,6 +13,7 @@ const pages = {
 }
 
     Given("I am on the heroku app homepage", async () => {
+        console.log(browser.getPageSource());
         browser.url("https://the-internet.herokuapp.com/");
     });
 
