@@ -4,19 +4,45 @@ const Page = require('./herokupage');
 class AddRemovePage extends Page  {
 
     get content(){
-        return $('div[id="content"]'); 
+        switch(process.env.OS){
+            case "Desktop":
+                return $('div[id="content"]'); 
+            case "Android":
+                const parentSelector = 'new UiSelector().resourceId("content")';
+                const parent = $(`android=${parentSelector}`); 
+                const childSelector = 'new UiSelector().className("android.widget.TextView")'
+                return parent.$(`android=${childSelector}`)
+        }
     }
 
     get addButton(){
-        return $('button=Add Element');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('button=Add Element');
+            case "Android":
+                const selector = 'new UiSelector().className("android.widget.Button").text("Add Element")';
+                return $(`android=${selector}`);
+        }
     }
 
     get deleteButton(){
-        return $('button=Delete');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('button=Delete');
+            case "Android":
+                const selector = 'new UiSelector().className("android.widget.Button").text("Delete")';
+                return $(`android=${selector}`);
+    }
     }
 
     get deleteButtons(){
-        return $$('button=Delete');
+        switch(process.env.OS){
+            case "Desktop":
+                return $$('button=Delete');
+            case "Android":
+                const selector = 'new UiSelector().className("android.widget.Button").text("Delete")';
+                return $$(`android=${selector}`);
+    }
     }
 
     async countNumberOfDeleteButtons(){

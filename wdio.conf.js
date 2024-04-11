@@ -138,6 +138,7 @@ exports.config = {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
+        addConsoleLogs: true,
     }]],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
@@ -237,21 +238,22 @@ exports.config = {
      * @param {string}                   uri      path to feature file
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // beforeFeature: function (uri, feature) {
-    // },
-    /**
-     *
-     * Runs before a Cucumber Scenario.
-     * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
-     * @param {object}                 context  Cucumber World object
-     */
-    beforeScenario: async function (world, context) {
+    beforeFeature: async function (uri, feature) {
         if(this.port == 4723){
             const selector = 'new UiSelector().resourceId("com.android.chrome:id/signin_fre_dismiss_button")';
             const button = await $(`android=${selector}`);
             await button.click();
         }
     },
+    /**
+     *
+     * Runs before a Cucumber Scenario.
+     * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
+     * @param {object}                 context  Cucumber World object
+     */
+    // beforeScenario: async function (world, context) {
+        
+    // },
     /**
      *
      * Runs before a Cucumber Step.
@@ -276,6 +278,8 @@ exports.config = {
     afterStep: async function (step, scenario, { error, duration, passed }, context) {
         if (error) {
           await browser.takeScreenshot();
+          let pageSource = await browser.getPageSource();
+          console.log(pageSource);
         }
       }
     /**

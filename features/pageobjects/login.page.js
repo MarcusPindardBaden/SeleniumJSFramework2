@@ -4,7 +4,15 @@ const Page = require('./herokupage');
 class LoginPage extends Page  {
 
     get content(){
-        return $('div[id="content"]'); 
+        switch(process.env.OS){
+            case "Desktop":
+                return $('div[id="content"]'); 
+            case "Android":
+                const parentSelector = 'new UiSelector().resourceId("content")';
+                const parent = $(`android=${parentSelector}`); 
+                const childSelector = 'new UiSelector().className("android.widget.TextView")'
+                return parent.$(`android=${childSelector}`)
+        } 
     }
 
     get usernameInput(){

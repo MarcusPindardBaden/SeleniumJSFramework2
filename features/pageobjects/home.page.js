@@ -4,19 +4,43 @@ const Page = require('./herokupage');
 class HomePage extends Page  {
 
     get abLink(){
-        return $('a=A/B Testing'); 
+        switch(process.env.OS){
+            case "Desktop":
+                return $('a=A/B Testing');
+            case "Android":
+                const selector = 'new UiSelector().descriptionMatches("A/B Testing")';
+                return $(`android=${selector}`);      
+        }
     }
 
     get challengeDomLink() {
-        return $('a=Challenging DOM');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('a=Challenging DOM');
+            case "Android":
+                const selector = 'new UiSelector().descriptionMatches("Challenging DOM")';
+                return $(`android=${selector}`);      
+        }
     }
 
     get addRemoveElementsLink(){
-        return $('a=Add/Remove Elements');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('a=Add/Remove Elements');
+            case "Android":
+                const selector = 'new UiSelector().descriptionMatches("Add/Remove Elements")';
+                return $(`android=${selector}`);
+        }
     }
 
     get formAuthLink(){
-        return $('a=Form Authentication');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('a=Form Authentication');
+            case "Android":
+                const selector = 'new UiSelector().descriptionMatches("Form Authentication")';
+                return $(`android=${selector}`);
+        }
     }
 }
 

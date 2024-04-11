@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":2,"items":[{"uid":"fe5c280dcde6cf3e7e3cbf6fa8b42248","name":"The Internet Guinea Pig Website: As a user, I can add and remove elements on the add/remove elements page","statistic":{"failed":1,"broken":0,"skipped":1,"passed":4,"unknown":0,"total":6}},{"uid":"cee02b44feb58f89c14f5a2fc3b9bff4","name":"The Internet Guinea Pig Website: As a user, I can view a specific element in the challengeDom table","statistic":{"failed":0,"broken":3,"skipped":0,"passed":7,"unknown":0,"total":10}}]}

@@ -13,12 +13,11 @@ const pages = {
 }
 
     Given("I am on the heroku app homepage", async () => {
-        console.log(browser.getPageSource());
         browser.url("https://the-internet.herokuapp.com/");
     });
 
     When("I click on add-remove elements", async () => {
-        (await pages.home.addRemoveElementsLink).click();
+        await pages.home.addRemoveElementsLink.click();
     });
 
     Then("I should see the add-remove elements page", async () => {
@@ -54,12 +53,12 @@ const pages = {
     });
 
     Then("I can verify that I see the value {string} in the correct row {string}", async (string, string2) => {
-        let tableRow = await pages.challengeDom.findTableRowOfElement(string);
+        let tableRow = await pages.challengeDom.findRowIndexOfCell(string);
         await expect(tableRow).toEqual(string2);
     });
 
     Then("I can verify that I see the value {string} in the correct column {string}", async (string, string2) => {
-        let ColumnHeader = await pages.challengeDom.findTableColumnHeaderOfElement(string);
+        let ColumnHeader = await pages.challengeDom.getColumnHeaderTitle(string);
         await expect(ColumnHeader).toEqual(string2);
     });
 

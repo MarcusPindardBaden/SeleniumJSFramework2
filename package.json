@@ -6,13 +6,15 @@
     "test": "wdio run ./wdio.conf.js && allure generate --clean && allure open",
     "tagTest": "wdio run ./wdio.conf.js --cucumberOpts.tagExpression && allure generate --clean && allure open",
     "wdio": "wdio run ./wdio.conf.js",
-    "report": "allure generate --clean && allure open"
+    "report": "allure generate --clean && allure open",
+    "android": "$env:OS='Android'& npm run wdio --cucumberOpts.tagExpression"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "webdriverio": "^8.35.1"
   },
   "devDependencies": {
