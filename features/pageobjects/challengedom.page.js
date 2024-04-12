@@ -52,26 +52,13 @@ class ChallengeDomPage extends Page  {
     }
 
     async getAllCellsInRow(cellValue){
-        let allCells;
         const selectedCell = await this.getSpecificCell(cellValue);
-        const selectedCellText = await selectedCell.getText();
-        await console.log(selectedCellText);
-        const cellRow = await selectedCell.$('..');
-        switch(process.env.OS)
-        {
-            case "Desktop":
-                allCells = await cellRow.$$('td')
-                return allCells;
-            case "Android":
-                const selector = 'new UiSelector().className("android.view.View")';
-                allCells = await cellRow.$$(`android=${selector}`);
-                return allCells;
-        }
+        const cellRow = await selectedCell.parentElement().$$('td');
+        return cellRow;
     }
 
     async getSpecificCell(cellValue){
         let cell;
-        await console.log("to confirm, cell value: "+ cellValue);
         switch(process.env.OS){
             case "Desktop":
                 cell = await this.table.$('td='+ cellValue +'');
@@ -83,14 +70,16 @@ class ChallengeDomPage extends Page  {
         }
     }
 
-    async tableHeader(){
+    async getTableHeaders(){
         switch(process.env.OS)
         {
             case "Desktop":
-                return 'th';
+                return this.table.$$('th');
             case "Android":
                 const selector = 'new UiSelector().className("android.view.View")';
-                return `android=${selector}`.toString();
+                const list = await this.table.$$(`android=${selector}`);
+                const falseHeader = await list.shift();
+                return list;
         }
     }
 
@@ -123,34 +112,30 @@ class ChallengeDomPage extends Page  {
     }
 
 
-    async findColumnIndexOfCell(cellValue) {
+    async findColumnIndexOfCell(cellValue, rowIndex) {
         let columnIndex;
-        const fullRow = await this.getAllCellsInRow(cellValue);
-        for(let cell of fullRow)
-        {
-            let cellText = await cell.getText();
-            if(cellText.match(cellValue))
+        const allRows = await this.getRowsOfTable();
+        const cellRow = await allRows[rowIndex];
+        const rowChildren = await this.getCellsOfRow(cellRow);
+            for(let cell of rowChildren)
             {
-                columnIndex = cellRowElements.indexOf(element);
-                break;
+                let cellText = await cell.getText();
+                if(cellText.match(cellValue))
+                {
+                    columnIndex = await rowChildren.indexOf(cell);
+                    break;
+                }
             }
-        }
         return columnIndex;
     }
 
 
-    async getColumnHeaderTitle(cellValue){
-        console.log(cellValue)
-        const index = await this.findColumnIndexOfCell(cellValue);
-        switch(process.env.OS)
-        {
-            case "Desktop":
-                return this.table.$$(this.tableHeader)[index].getText();
-            case "Android":
-                const headerRow = await this.table.$(this.tableHeader);
-                const selector = 'new UiSelector().className("android.view.View").index('+index+')';
-                return headerRow.$(`android=${selector}`).getText();
-        }
+    async getColumnHeaderTitle(cellValue, rowIndex){
+        const columnIndex = await this.findColumnIndexOfCell(cellValue,rowIndex);
+        const headerRow = await this.getTableHeaders();
+        await console.log("number of headers"+ headerRow.length);
+        const columnTitle = await headerRow[columnIndex].getText();
+        return columnTitle;
     }
 }
 

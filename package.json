@@ -7,7 +7,7 @@
     "tagTest": "wdio run ./wdio.conf.js --cucumberOpts.tagExpression && allure generate --clean && allure open",
     "wdio": "wdio run ./wdio.conf.js",
     "report": "allure generate --clean && allure open",
-    "android": "$env:OS='Android'& npm run wdio --cucumberOpts.tagExpression"
+    "android": "$env:OS='Android'& npm run wdio"
   },
   "keywords": [],
   "author": "",

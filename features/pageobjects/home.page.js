@@ -24,6 +24,7 @@ class HomePage extends Page  {
     }
 
     get addRemoveElementsLink(){
+        console.log("process environment: ");
         switch(process.env.OS){
             case "Desktop":
                 return $('a=Add/Remove Elements');

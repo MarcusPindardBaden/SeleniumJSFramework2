@@ -13,11 +13,11 @@ const pages = {
 }
 
     Given("I am on the heroku app homepage", async () => {
-        browser.url("https://the-internet.herokuapp.com/");
+        await browser.url("https://the-internet.herokuapp.com/");
     });
 
     When("I click on add-remove elements", async () => {
-        await pages.home.addRemoveElementsLink.click();
+        (await pages.home.addRemoveElementsLink).click();
     });
 
     Then("I should see the add-remove elements page", async () => {
@@ -44,7 +44,7 @@ const pages = {
 
 
     When("I click on challenge Dom", async () => {
-        (await pages.home.challengeDomLink).click();
+        await pages.home.challengeDomLink.click();
     });
 
     Then("I should see the challenge Dom page", async () => {
@@ -57,9 +57,12 @@ const pages = {
         await expect(tableRow).toEqual(string2);
     });
 
-    Then("I can verify that I see the value {string} in the correct column {string}", async (string, string2) => {
-        let ColumnHeader = await pages.challengeDom.getColumnHeaderTitle(string);
-        await expect(ColumnHeader).toEqual(string2);
+    Then("I can verify that I see the value {string} in the correct column {string} {string}", async (string, string2, string3) => {
+        await console.log("string: "+string2);
+        let rowIndex = parseInt(string2);
+        await console.log("int"+rowIndex);
+        let ColumnHeader = await pages.challengeDom.getColumnHeaderTitle(string, rowIndex);
+        await expect(ColumnHeader).toEqual(string3);
     });
 
 

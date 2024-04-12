@@ -8,14 +8,14 @@ Feature: The Internet Guinea Pig Website
     And I can add an element to the page
     And I can remove an element from the page
 
-  @current
+
    Scenario Outline: As a user, I can view a specific element in the challengeDom table
 
     Given I am on the heroku app homepage
     When I click on challenge Dom
     Then I should see the challenge Dom page
     And I can verify that I see the value "<value>" in the correct row "<row>" 
-    And I can verify that I see the value "<value>" in the correct column "<column>"
+    And I can verify that I see the value "<value>" in the correct column "<row>" "<column>"
     Examples:
     | value | row | column |
     | Apeirian7 | 8 | Ipsum | 
