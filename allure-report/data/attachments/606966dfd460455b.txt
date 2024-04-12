@@ -1,7 +1,0 @@
-.........Console Logs.........
-
-string: 5
-int5
-[33m108[39m
-[33m107[39m
-number of headers107

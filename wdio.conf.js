@@ -261,9 +261,14 @@ exports.config = {
      * @param {IPickle}            scenario scenario pickle
      * @param {object}             context  Cucumber World object
      */
-    // beforeStep: function (step, scenario, context) {
-        
-    // },
+    beforeStep: async function (step, scenario, context) {
+        const isAlertOpen = await browser.isAlertOpen(); 
+        if(isAlertOpen){
+            const alertText = await browser.getAlertText();
+            console.log("alert text: "+alertText);
+            await browser.acceptAlert();
+        } 
+    },
     /**
      *
      * Runs after a Cucumber Step.

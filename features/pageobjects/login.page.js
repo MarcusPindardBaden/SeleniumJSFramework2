@@ -16,31 +16,61 @@ class LoginPage extends Page  {
     }
 
     get usernameInput(){
-        return $('input[id="username"]');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('input[id="username"]');
+            case "Android":
+                const selector = 'new UiSelector().resourceId("username")';
+                return $(`android=${selector}`);
+        } 
     }
 
     get passwordInput(){
-        return $('input[id="password"]');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('input[id="password"]');
+            case "Android":
+                const selector = 'new UiSelector().resourceId("password")';
+                return $(`android=${selector}`);
+        }
     }
 
     get loginButton(){
-        return $('button=Login');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('button=Login');
+            case "Android":
+                const selector = 'new UiSelector().className("android.widget.Button")';
+                return $(`android=${selector}`);
+        }
     }
 
     get logoutButton(){
-        return $('a=Logout');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('button=Logout');
+            case "Android":
+                const selector = 'new UiSelector().className("android.widget.Button")';
+                return $(`android=${selector}`);
+        }
     }
 
     get flashMessage(){
-        return $('div[id="flash"]');
+        switch(process.env.OS){
+            case "Desktop":
+                return $('div[id="flash"]');
+            case "Android":
+                const selector = 'new UiSelector().className("android.widget.TextView")';
+                return $$(`android=${selector}`)[1];
+        }
     }
 
 
 
     async enterLoginDetails(username, password){
-        (await this.usernameInput).addValue(username);
-        (await this.passwordInput).addValue(password);
-        (await this.loginButton).click();
+        await this.usernameInput.addValue(username);
+        await this.passwordInput.addValue(password);
+        await this.loginButton.click();
     };
 
     async getFlashText(){

@@ -79,6 +79,7 @@ const pages = {
     });
 
     Then("I am succesfully logged in", async () => {
+        await browser.pause(5000);
         let flashmessage = await  pages.login.getFlashText();
         await expect(flashmessage).toContain("logged into");
     });
